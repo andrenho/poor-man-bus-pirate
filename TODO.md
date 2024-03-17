@@ -1,10 +1,10 @@
 # TODO
 
 ## Basic setup
-- [ ] Design circuit
-  - [ ] Power
-  - [ ] Ports
-  - [ ] LEDs
+- [x] Design circuit
+  - [x] Power
+  - [x] Ports
+  - [x] LEDs
 - [ ] Basic REPL
   - [ ] ASCII and binary
 - [ ] Basic UI
