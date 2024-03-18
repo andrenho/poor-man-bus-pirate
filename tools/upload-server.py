@@ -7,11 +7,12 @@ class FileUploadHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         content_length = int(self.headers['Content-Length'])
         data = self.rfile.read(content_length)
-        with open('uploaded_file.txt', 'wb') as f:
+        with open('binary.elf', 'wb') as f:
             f.write(data)
         self.send_response(200)
         self.end_headers()
         self.wfile.write(b'File uploaded successfully')
+        os.system("openocd -f interface/raspberrypi-swd.cfg -f target/rp2040.cfg -c \"program binary.elf verify reset exit\"")
 
 def run(server_class=HTTPServer, handler_class=FileUploadHandler, port=8000):
     server_address = ('', port)

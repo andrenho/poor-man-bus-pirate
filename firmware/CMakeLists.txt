@@ -26,6 +26,13 @@ add_custom_target(upload-usb
 	VERBATIM
 )
 
+add_custom_target(upload-remote
+	COMMAND curl -X POST -H "Content-Type: application/octet-stream" --data-binary @${CMAKE_PROJECT_NAME}.elf http://localhost:8000
+	DEPENDS ${CMAKE_PROJECT_NAME}
+	COMMENT "Uploading remotely..."
+	VERBATIM
+)
+
 add_custom_target(talk
 	COMMAND screen /dev/ttyACM0 115200
 )
