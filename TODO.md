@@ -6,7 +6,7 @@
   - [x] Ports
   - [x] LEDs
 - [ ] Upload binary to pico
-  - [ ] Basic program
+  - [x] Basic program
   - [ ] Make SWD cable
   - [ ] Makefile - upload via SWD
   - [ ] Makefile - upload via USB
