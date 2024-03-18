@@ -8,7 +8,7 @@
 - [ ] Upload binary to pico
   - [x] Basic program
   - [ ] Make SWD cable
-  - [ ] Makefile - upload via SWD
+  - [x] Makefile - upload via SWD
   - [ ] Makefile - upload via USB
 - [ ] Create wiki
 - [ ] Basic REPL

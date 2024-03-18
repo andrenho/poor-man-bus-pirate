@@ -11,6 +11,14 @@ add_executable(poor-man-bus-pirate
 	  main.c
 )
 
+add_custom_target(upload-swd
+	COMMAND openocd -f interface/raspberrypi-swd.cfg -f target/rp2040.cfg -c "program poor-man-bus-pirate.elf verify reset exit"
+	WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
+	DEPENDS poor-man-bus-pirate
+	COMMENT "Uploading via SWD..."
+	VERBATIM
+)
+
 pico_enable_stdio_usb(poor-man-bus-pirate 1)
 pico_enable_stdio_uart(poor-man-bus-pirate 1)
 
