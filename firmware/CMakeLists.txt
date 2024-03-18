@@ -8,7 +8,9 @@ set(CMAKE_CXX_STANDARD 17)
 pico_sdk_init()
 
 add_executable(${CMAKE_PROJECT_NAME}
-	  main.c
+		main.cc
+		util/getline.cc
+		util/getline.hh
 )
 
 add_custom_target(upload-swd
@@ -27,7 +29,7 @@ add_custom_target(upload-usb
 )
 
 add_custom_target(upload-remote
-	COMMAND curl -X POST -H "Content-Type: application/octet-stream" --data-binary @${CMAKE_PROJECT_NAME}.elf http://localhost:8000
+	COMMAND curl -X POST -H "Content-Type: application/octet-stream" --data-binary @${CMAKE_PROJECT_NAME}.elf http://$ENV{REMOTE_IP}:8000
 	DEPENDS ${CMAKE_PROJECT_NAME}
 	COMMENT "Uploading remotely..."
 	VERBATIM
