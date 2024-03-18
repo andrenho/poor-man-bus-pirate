@@ -5,14 +5,14 @@
   - [x] Power
   - [x] Ports
   - [x] LEDs
-- [ ] Upload binary to pico
+- [x] Upload binary to pico
   - [x] Basic program
-  - [ ] Make SWD cable
+  - [x] Make SWD cable
   - [x] Makefile - upload via SWD
-  - [ ] Makefile - upload via USB
-- [ ] Create wiki
+  - [x] Makefile - upload via USB
 - [ ] Basic REPL
   - [ ] ASCII and binary
+  - [ ] Create wiki
 - [ ] Basic UI
 
 ## UART (2x)

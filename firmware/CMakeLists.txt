@@ -20,10 +20,14 @@ add_custom_target(upload-swd
 )
 
 add_custom_target(upload-usb
-  COMMAND ${CMAKE_SOURCE_DIR}/upload-usb.sh ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}.uf2
+	COMMAND ${CMAKE_SOURCE_DIR}/upload-usb.sh ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}.uf2
 	DEPENDS ${CMAKE_PROJECT_NAME}
-  COMMENT "Uploading via USB..."
+	COMMENT "Uploading via USB..."
 	VERBATIM
+)
+
+add_custom_target(talk
+	COMMAND screen /dev/ttyACM0 115200
 )
 
 pico_enable_stdio_usb(${CMAKE_PROJECT_NAME} 1)
