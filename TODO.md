@@ -5,6 +5,12 @@
   - [x] Power
   - [x] Ports
   - [x] LEDs
+- [ ] Upload binary to pico
+  - [ ] Basic program
+  - [ ] Make SWD cable
+  - [ ] Makefile - upload via SWD
+  - [ ] Makefile - upload via USB
+- [ ] Create wiki
 - [ ] Basic REPL
   - [ ] ASCII and binary
 - [ ] Basic UI
