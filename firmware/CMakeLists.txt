@@ -19,6 +19,13 @@ add_custom_target(upload-swd
 	VERBATIM
 )
 
+add_custom_target(upload-usb
+  COMMAND ${CMAKE_SOURCE_DIR}/upload-usb.sh ${CMAKE_BINARY_DIR}/poor-man-bus-pirate.uf2
+	DEPENDS poor-man-bus-pirate
+  COMMENT "Uploading via USB..."
+	VERBATIM
+)
+
 pico_enable_stdio_usb(poor-man-bus-pirate 1)
 pico_enable_stdio_uart(poor-man-bus-pirate 1)
 
