@@ -1,6 +1,8 @@
 #ifndef GETLINE_HH_
 #define GETLINE_HH_
 
-char* getLine(bool fullDuplex=false, char lineBreak='\n');
+#include <cstddef>
+
+size_t getline(char* buf, size_t max_sz);
 
 #endif //GETLINE_HH_

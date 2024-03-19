@@ -10,9 +10,7 @@
   - [x] Make SWD cable
   - [x] Makefile - upload via SWD
   - [x] Makefile - upload via USB
-- [ ] Basic REPL
-  - [ ] ASCII and binary
-  - [ ] Create wiki
+- [x] Basic REPL
 - [ ] Basic UI
 
 ## UART (2x)

@@ -4,17 +4,16 @@
 #include <cstdlib>
 
 #include "util/getline.hh"
+#include "parser.hh"
 
 int main()
 {
 	stdio_init_all();
 
-    char buf[512];
+    char buf[256];
 	while (true) {
         printf("> ");
-        char* buf = getLine(true, '\r');
-        puts("");
-        // call REPL
-        free(buf);
+        getline(buf, sizeof buf);
+        parse(buf);
 	}
 }
