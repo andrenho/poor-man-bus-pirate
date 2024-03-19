@@ -1,16 +1,12 @@
-#include "parser.hh"
-#include "words.hh"
+#include "buspirate.hh"
 
-#include <cstdint>
 #include <cstring>
 #include <cstdio>
 
 #define MAX_TOKENS 6
 static const char* SYNTAX_ERROR = "Syntax error.";
 
-static void execute(uint8_t token_n, Token* tokens);
-
-void parse(char* line)
+void BusPirate::parse(char* line)
 {
     Token tokens[MAX_TOKENS];
     uint8_t token_n = 0;
@@ -36,15 +32,16 @@ done:
     execute(token_n, tokens);
 }
 
-void execute(uint8_t token_n, Token* tokens)
+void BusPirate::execute(uint8_t token_n, Token* tokens)
 {
-    if (token_n == 1) {
-        if (tokens[0] == Token::HELLO) {
+    if (token_n == 0)
+        return;
+
+    switch (tokens[0]) {
+        case Token::HELLO:
             printf("hello\n");
-        } else {
+            break;
+        default:
             puts(SYNTAX_ERROR);
-        }
-    } else {
-        puts(SYNTAX_ERROR);
     }
 }

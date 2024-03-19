@@ -11,7 +11,6 @@
   - [x] Makefile - upload via SWD
   - [x] Makefile - upload via USB
 - [x] Basic REPL
-- [ ] Basic UI
 
 ## UART (2x)
 - [ ] Set characteristics
@@ -20,8 +19,7 @@
 - [ ] UI support
 - [ ] Guess speed
 
-## USART
-- [ ] USART support
+## UI
 
 ## SPI slave (3x)
 - [ ] Set characteristics

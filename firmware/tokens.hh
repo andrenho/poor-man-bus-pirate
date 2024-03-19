@@ -1,18 +1,17 @@
-#ifndef WORDS_HH_
-#define WORDS_HH_
+#ifndef TOKENS_HH_
+#define TOKENS_HH_
 
 #include <cstdint>
 
 enum class Token {
-    HELLO,
-    EOF
+    HELLO
 };
 
-struct Word {
+static struct Word {
     const char* str;
     Token       token;
 } words[] = {
     { "hello", Token::HELLO },
 };
 
-#endif //WORDS_HH_
+#endif //TOKENS_HH_

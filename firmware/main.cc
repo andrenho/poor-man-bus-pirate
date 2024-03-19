@@ -1,19 +1,20 @@
 #include "pico/stdlib.h"
 
 #include <cstdio>
-#include <cstdlib>
 
 #include "util/getline.hh"
-#include "parser.hh"
+#include "buspirate.hh"
 
 int main()
 {
 	stdio_init_all();
 
+    BusPirate bus_pirate;
+
     char buf[256];
 	while (true) {
         printf("> ");
         getline(buf, sizeof buf);
-        parse(buf);
+        bus_pirate.parse(buf);
 	}
 }

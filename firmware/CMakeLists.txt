@@ -11,9 +11,9 @@ add_executable(${CMAKE_PROJECT_NAME}
 		main.cc
 		util/getline.cc
 		util/getline.hh
-		parser.cc
-		parser.hh
-		words.hh
+		buspirate.cc
+		buspirate.hh
+		tokens.hh
 )
 
 add_custom_target(upload-swd

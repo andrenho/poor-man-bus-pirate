@@ -13,7 +13,7 @@ size_t getline(char* buf, size_t max_sz)
             printf("%c", c);
             buf[pos++] = c;
         } else if ((c == 127 || c == '\b') && pos > 0) {
-            printf("\e[1D \e[1D");
+            printf("\x1b[1D \x1b[1D");
             buf[pos] = 0;
             --pos;
         } else if (c == '\n' || c == '\r') {
