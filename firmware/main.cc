@@ -18,3 +18,5 @@ int main()
         bus_pirate.parse(buf);
 	}
 }
+
+// https://pico.pinout.xyz/

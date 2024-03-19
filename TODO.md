@@ -14,6 +14,7 @@
 
 ## UART (2x)
 - [ ] Set characteristics
+  - [ ] Add help
 - [ ] Interact
 - [ ] Interact in background
 - [ ] UI support

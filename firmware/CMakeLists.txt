@@ -14,6 +14,9 @@ add_executable(${CMAKE_PROJECT_NAME}
 		buspirate.cc
 		buspirate.hh
 		tokens.hh
+		protocols/uart.cc
+		protocols/uart.hh
+		protocols/protocol.hh
 )
 
 add_custom_target(upload-swd
