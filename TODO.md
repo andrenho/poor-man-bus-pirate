@@ -10,7 +10,7 @@
   - [x] Make SWD cable
   - [x] Makefile - upload via SWD
   - [x] Makefile - upload via USB
-- [ ] Basic REPL
+- [x] Basic REPL
 - [ ] Set/get variables
 - [ ] Store/load variables to/from flash
 

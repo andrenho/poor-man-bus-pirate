@@ -9,6 +9,9 @@ int main()
 {
 	stdio_init_all();
 
+    printf("Welcome to Poor Man Bus Pirate!\n");
+    printf("See https://github.com/andrenho/poor-man-bus-pirate for help.\n");
+
     char buf[256];
 	while (true) {
         printf("> ");
