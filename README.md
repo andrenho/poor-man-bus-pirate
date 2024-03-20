@@ -21,7 +21,7 @@ A very basic bus sniffer and manipulator (UART, SPI, I2C)
 
 | BP pin | UART function | SPI master | SPI slave | SPI sniff | I2C function | PWM function | RPi Pico pin |
 |--------|---------------|------------|-----------|-----------|--------------|--------------|--------------|
-| 5V     |               |            |           |           |              |              |              | (optional)
+| 5V+ (optional) |       |            |           |           |              |              |              |
 | COMM0  | TX            | MISO       | MOSI      | RX0       | SDA          | PWM0         | GP0 (1)      |
 | COMM1  | RX            | CS         | SS        | SS        | SCL          |              | GP1 (2)      |
 | COMM2  | CTS           | SCK        | SCK       | SCK       |              | PMW1         | GP2 (4), GP10 (14) |
