@@ -1,5 +1,6 @@
-#include <cstdio>
-#include "getline.hh"
+#include "getline.h"
+
+#include <stdio.h>
 
 size_t getline(char* buf, size_t max_sz)
 {

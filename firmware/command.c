@@ -1,22 +1,24 @@
-#include "buspirate.hh"
+#include "command.h"
 
-#include <cstring>
-#include <cstdio>
+#include <stdio.h>
+#include <string.h>
 
 #define MAX_TOKENS 6
 static const char* SYNTAX_ERROR = "Syntax error.";
 
-void BusPirate::parse(char* line)
+static void execute(uint8_t token_n, Token* tokens);
+
+void command_parse(char* line)
 {
     Token tokens[MAX_TOKENS];
     uint8_t token_n = 0;
 
     char* token = strtok(line, " ");
-    while (token != nullptr) {
+    while (token != NULL) {
 
-        for (auto const& word: words) {
-            if (strcmp(token, word.str) == 0) {
-                tokens[token_n++] = word.token;
+        for (Word* word = words; word->str != 0; ++word) {
+            if (strcmp(token, word->str) == 0) {
+                tokens[token_n++] = word->token;
                 if (token_n > MAX_TOKENS)
                     goto done;
             } else {
@@ -25,20 +27,20 @@ void BusPirate::parse(char* line)
             }
         }
 
-        token = strtok(nullptr, " ");
+        token = strtok(NULL, " ");
     }
 
 done:
     execute(token_n, tokens);
 }
 
-void BusPirate::execute(uint8_t token_n, Token* tokens)
+void execute(uint8_t token_n, Token* tokens)
 {
     if (token_n == 0)
         return;
 
     switch (tokens[0]) {
-        case Token::HELLO:
+        case T_HELLO:
             printf("hello\n");
             break;
         default:

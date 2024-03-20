@@ -10,11 +10,11 @@
   - [x] Make SWD cable
   - [x] Makefile - upload via SWD
   - [x] Makefile - upload via USB
-- [x] Basic REPL
+- [ ] Basic REPL
+- [ ] Set/get variables
+- [ ] Store/load variables to/from flash
 
 ## UART (2x)
-- [ ] Set characteristics
-  - [ ] Add help
 - [ ] Interact
 - [ ] Interact in background
 - [ ] UI support

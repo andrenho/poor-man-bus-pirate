@@ -8,15 +8,12 @@ set(CMAKE_CXX_STANDARD 17)
 pico_sdk_init()
 
 add_executable(${CMAKE_PROJECT_NAME}
-		main.cc
-		util/getline.cc
-		util/getline.hh
-		buspirate.cc
-		buspirate.hh
-		tokens.hh
-		protocols/uart.cc
-		protocols/uart.hh
-		protocols/protocol.hh
+		main.c
+		util/getline.c
+		util/getline.h
+		command.c
+		command.h
+		tokens.h
 )
 
 add_custom_target(upload-swd
