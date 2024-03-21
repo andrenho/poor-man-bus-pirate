@@ -5,12 +5,42 @@
 #include <stdlib.h>
 #include <setjmp.h>
 #include <limits.h>
+#include <hardware/flash.h>
+#include <hardware/sync.h>
 
 #include "command.h"
+
+#define FLASH_TARGET_OFFSET (3 * 512 * 1024)  // top quadrant of memory
 
 Config var;
 
 static jmp_buf variable_error;
+
+static void variables_save()
+{
+    /*
+    for (int i = 0; i < sizeof var; ++i)
+        printf("%02X ", ((uint8_t const *) &var)[i]);
+    printf("\n");
+     */
+
+    uint32_t ints = save_and_disable_interrupts();
+    flash_range_erase(FLASH_TARGET_OFFSET, sizeof(Config));
+    flash_range_program(FLASH_TARGET_OFFSET, (uint8_t const *) &var, sizeof(Config));
+    restore_interrupts(ints);
+}
+
+void variables_load()
+{
+    char* p = (char *) (XIP_BASE + FLASH_TARGET_OFFSET);
+    memcpy(&var, p, sizeof(Config));
+
+    /*
+    for (int i = 0; i < sizeof var; ++i)
+        printf("%02X ", p[i]);
+    printf("\n");
+     */
+}
 
 void variables_reset()
 {
@@ -28,6 +58,8 @@ void variables_reset()
 
     var.i2c.baud = 100000;
     var.i2c.output = HEX;
+
+    variables_save();
 }
 
 static uint32_t to_uint(const char* value)
@@ -125,7 +157,9 @@ void variable_set(const char* key, const char* value)
             var.i2c.output = to_output(value);
         } else {
             syntax_error();
+            return;
         }
+        variables_save();
     } else {
         syntax_error();
     }

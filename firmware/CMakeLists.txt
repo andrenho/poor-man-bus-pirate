@@ -17,6 +17,11 @@ add_executable(${CMAKE_PROJECT_NAME}
 		src/variables.h
 )
 
+add_custom_command(TARGET ${CMAKE_PROJECT_NAME}
+		POST_BUILD
+		COMMAND arm-none-eabi-size -G ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}.elf
+)
+
 add_custom_target(upload-swd
 	COMMAND openocd -f interface/raspberrypi-swd.cfg -f target/rp2040.cfg -c "program ${CMAKE_PROJECT_NAME}.elf verify reset exit"
 	WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"

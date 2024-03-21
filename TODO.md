@@ -14,7 +14,8 @@
 - [ ] Set/get variables
   - [x] Set/get
   - [x] All var code into single source
-  - [ ] Store/load variables to/from flash
+  - [x] Store/load variables to/from flash
+- [x] Create help
 - [ ] Exe size on Makefile
 
 ## UART (2x)

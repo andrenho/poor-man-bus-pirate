@@ -38,6 +38,7 @@ typedef struct {
 
 extern Config var;
 
+void variables_load();
 void variables_reset();
 void variables_print();
 void variable_set(const char* key, const char* value);

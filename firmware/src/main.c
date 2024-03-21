@@ -4,13 +4,17 @@
 
 #include "util/getline.h"
 #include "command.h"
+#include "variables.h"
 
 int main()
 {
 	stdio_init_all();
+    getchar();
 
     printf("Welcome to Poor Man Bus Pirate!\n");
-    printf("See https://github.com/andrenho/poor-man-bus-pirate for help.\n");
+    printf("Available commands: set, reset, use\n");
+
+    variables_load();
 
     char buf[256];
 	while (true) {
@@ -19,5 +23,3 @@ int main()
         command_parse(buf);
 	}
 }
-
-// https://pico.pinout.xyz/
