@@ -5,14 +5,16 @@
 #include "util/getline.h"
 #include "command.h"
 #include "variables.h"
+#include "output.h"
 
 int main()
 {
-	stdio_init_all();
+	stdio_usb_init();
 
     printf("Welcome to Poor Man Bus Pirate!\n");
     printf("Available commands: set, reset, use\n");
 
+    output_init();
     variables_load();
 
     char buf[256];

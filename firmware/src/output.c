@@ -2,15 +2,28 @@
 
 #include <stdio.h>
 
+#include "pico/util/queue.h"
+
+#define QUEUE_COUNT 3
+#define QUEUE_SIZE  512
+
 static Output output_mode = ASCII;
-static Color  last_color = C_NONE;
+static Channel  last_color = C_NONE;
+
+queue_t queue[QUEUE_COUNT];
+
+void output_init()
+{
+    for (size_t i = 0; i < QUEUE_COUNT; ++i)
+        queue_init(&queue[i], 1, QUEUE_SIZE);
+}
 
 void output_set_mode(Output output)
 {
     output_mode = output;
 }
 
-static void output_set_color(Color color)
+static void output_set_color(Channel color)
 {
     if (color != last_color) {
         switch (color) {
@@ -31,9 +44,9 @@ static void output_set_color(Color color)
     }
 }
 
-void output_print(const char* s, Color color)
+void output_print(const char* s, Channel channel)
 {
-    output_set_color(color);
+    output_set_color(channel);
     printf("%s", s);
 }
 
@@ -49,16 +62,15 @@ static int printb(uintmax_t n)
     return printf("%s", p);
 }
 
-
-void output_putchar(char c, Color color)
+static void output_putchar(char c, Channel channel)
 {
-    output_set_color(color);
+    output_set_color(channel);
     switch (output_mode) {
         case ASCII:
-            if (c >= 32 && c < 127)
-                putchar(c);
+            if (c == 0x1b)
+                printf("[ESC]");
             else
-                printf("[%02X]", c);
+                putchar(c);
             break;
         case DEC:
             printf("%d ", c);
@@ -70,4 +82,19 @@ void output_putchar(char c, Color color)
             printb(c);
             break;
     }
+}
+
+void output_queue_add(char c, Channel channel)
+{
+    if (!queue_try_add(&queue[channel], &c)) {
+        // TODO - do something if the queue is full
+    }
+}
+
+void output_print_queues()
+{
+    char c;
+    for (size_t i = 0; i < QUEUE_COUNT; ++i)
+        while (queue_try_remove(&queue[i], &c))
+            output_putchar(c, i);
 }

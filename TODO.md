@@ -19,8 +19,9 @@
 - [x] Exe size on Makefile
 
 ## UART (2x)
-- [ ] Initialize
-- [ ] Talk
+- [x] Initialize
+- [x] Speak
+- [ ] Listen
 - [ ] Sniff
 - [ ] Guess speed
 
