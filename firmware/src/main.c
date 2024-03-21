@@ -9,7 +9,6 @@
 int main()
 {
 	stdio_init_all();
-    getchar();
 
     printf("Welcome to Poor Man Bus Pirate!\n");
     printf("Available commands: set, reset, use\n");

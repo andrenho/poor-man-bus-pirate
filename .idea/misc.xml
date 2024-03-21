@@ -3,4 +3,12 @@
   <component name="CMakeWorkspace" PROJECT_DIR="$PROJECT_DIR$/firmware">
     <contentRoot DIR="$PROJECT_DIR$" />
   </component>
+  <component name="CidrRootsConfiguration">
+    <sourceRoots>
+      <file path="$PROJECT_DIR$/firmware" />
+    </sourceRoots>
+    <libraryRoots>
+      <file path="$USER_HOME$/pico/pico-sdk" />
+    </libraryRoots>
+  </component>
 </project>

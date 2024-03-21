@@ -116,7 +116,7 @@ static Order to_order(const char* value)
 static void uart_mode(const char* value, char* mode)
 {
     if ((value[0] != '8' && value[0] != '7')
-    ||  (value[1] != 'n' && value[1] != 'e')
+    ||  (value[1] != 'n' && value[1] != 'e' && value[1] != 'o')
     ||  (value[2] != '0' && value[2] != '1')
     ||  value[3] != '\0')
         longjmp(variable_error, 1);

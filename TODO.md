@@ -16,12 +16,12 @@
   - [x] All var code into single source
   - [x] Store/load variables to/from flash
 - [x] Create help
-- [ ] Exe size on Makefile
+- [x] Exe size on Makefile
 
 ## UART (2x)
-- [ ] Interact
-- [ ] Interact in background
-- [ ] UI support
+- [ ] Initialize
+- [ ] Talk
+- [ ] Sniff
 - [ ] Guess speed
 
 ## UI

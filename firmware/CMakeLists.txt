@@ -15,6 +15,10 @@ add_executable(${CMAKE_PROJECT_NAME}
 		src/command.h
 		src/variables.c
 		src/variables.h
+		src/uart.c
+		src/uart.h
+		src/output.c
+		src/output.h
 )
 
 add_custom_command(TARGET ${CMAKE_PROJECT_NAME}

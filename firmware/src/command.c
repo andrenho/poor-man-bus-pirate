@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "uart.h"
 #include "variables.h"
 
 #define MAX_TOKENS 6
@@ -34,6 +35,7 @@ void execute(uint8_t n_tokens, char tokens[MAX_TOKENS][MAX_TOKEN_SZ])
             printf("Options: uart, spi_master, spi_slave, spi_sniff, i2c_master, i2c_salve, pmw0, pmw1\n");
         } else if (n_tokens == 2) {
             if (strcmp(tokens[1], "uart") == 0) {
+                uart_init_();
             } else if (strcmp(tokens[1], "spi_master") == 0) {
             } else if (strcmp(tokens[1], "spi_slave") == 0) {
             } else if (strcmp(tokens[1], "spi_sniff") == 0) {
