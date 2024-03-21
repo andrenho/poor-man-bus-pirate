@@ -35,7 +35,7 @@ A very basic bus sniffer and communicator (UART, SPI, I2C, etc). A simplified (a
   - `set spi.order [lsb | msb]` (default: msb)
   - `set spi.baud [NNNN]` (baud rate in Hz, master only, default: 100000)
   - `set spi.autorespond [off | NN]` (always respond with byte NN, default off)
-  - `set uart.output [ascii | dec | bin | hex]` (default: hex)
+  - `set spi.output [ascii | dec | bin | hex]` (default: hex)
 - I2C
   - `set i2c.baud [NNNN]` (baud rate in Hz, master only, default: 100000)
   - `set i2c.output [ascii | dec | bin | hex]` (default: hex)

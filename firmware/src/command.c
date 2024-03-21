@@ -3,30 +3,28 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "config.h"
 #include "variables.h"
 
 #define MAX_TOKENS 6
 #define MAX_TOKEN_SZ 20
-static const char* SYNTAX_ERROR = "Syntax error.";
 
-static void execute(uint8_t n_tokens, char** tokens);
+static void execute(uint8_t n_tokens, char tokens[MAX_TOKENS][MAX_TOKEN_SZ]);
 
 void command_parse(char* line)
 {
-    char* tokens[MAX_TOKENS];
-    uint8_t token_n = 0;
+    char tokens[MAX_TOKENS][MAX_TOKEN_SZ];
+    uint8_t n_tokens = 0;
 
     char* token = strtok(line, " ");
     while (token != NULL) {
-        snprintf(tokens[token_n++], MAX_TOKEN_SZ - 1, "%s", token);
+        snprintf(tokens[n_tokens++], MAX_TOKEN_SZ - 1, "%s", token);
         token = strtok(NULL, " ");
     }
 
-    execute(token_n, tokens);
+    execute(n_tokens, tokens);
 }
 
-void execute(uint8_t n_tokens, char** tokens)
+void execute(uint8_t n_tokens, char tokens[MAX_TOKENS][MAX_TOKEN_SZ])
 {
     if (n_tokens == 0)
         return;
@@ -43,18 +41,23 @@ void execute(uint8_t n_tokens, char** tokens)
         } else if (strcmp(tokens[1], "pwm0") == 0) {
         } else if (strcmp(tokens[1], "pwm1") == 0) {
         } else {
-            puts(SYNTAX_ERROR);
+            syntax_error();
         }
-    } else if (strcmp(tokens[0], "reset") == 0 && n_tokens == 0) {
+    } else if (strcmp(tokens[0], "reset") == 0 && n_tokens == 1) {
         variables_reset();
     } else if (strcmp(tokens[0], "set") == 0) {
         if (n_tokens == 1)
             variables_print();
-        else if (n_tokens == 2)
+        else if (n_tokens == 3)
             variable_set(tokens[1], tokens[2]);
         else
-            puts(SYNTAX_ERROR);
+            syntax_error();
     } else {
-        puts(SYNTAX_ERROR);
+        syntax_error();
     }
+}
+
+void syntax_error()
+{
+    printf("Syntax error.\n");
 }

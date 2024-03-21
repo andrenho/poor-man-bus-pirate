@@ -12,7 +12,10 @@
   - [x] Makefile - upload via USB
 - [x] Basic REPL
 - [ ] Set/get variables
-- [ ] Store/load variables to/from flash
+  - [x] Set/get
+  - [x] All var code into single source
+  - [ ] Store/load variables to/from flash
+- [ ] Exe size on Makefile
 
 ## UART (2x)
 - [ ] Interact

@@ -13,7 +13,6 @@ add_executable(${CMAKE_PROJECT_NAME}
 		src/util/getline.h
 		src/command.c
 		src/command.h
-		src/config.h
 		src/variables.c
 		src/variables.h
 )
