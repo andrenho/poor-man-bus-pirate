@@ -19,6 +19,8 @@ add_executable(${CMAKE_PROJECT_NAME}
 		src/uart.h
 		src/output.c
 		src/output.h
+		src/spi.c
+		src/spi.h
 )
 
 add_custom_command(TARGET ${CMAKE_PROJECT_NAME}
@@ -57,4 +59,4 @@ pico_enable_stdio_uart(${CMAKE_PROJECT_NAME} 1)
 
 pico_add_extra_outputs(${CMAKE_PROJECT_NAME})
 
-target_link_libraries(${CMAKE_PROJECT_NAME} pico_stdlib)
+target_link_libraries(${CMAKE_PROJECT_NAME} pico_stdlib hardware_spi)

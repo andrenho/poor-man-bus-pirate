@@ -20,7 +20,6 @@ typedef struct {
     bool     cpha;
     Order    order;
     uint32_t baud;
-    bool     has_autorespond;
     char     autorespond;
     Output   output;
 } SPIConfig;

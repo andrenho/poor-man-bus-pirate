@@ -53,7 +53,7 @@ void variables_reset()
     var.spi.cpha = 0;
     var.spi.order = MSB;
     var.spi.baud = 100000;
-    var.spi.autorespond = false;
+    var.spi.autorespond = 0xff;
     var.spi.output = HEX;
 
     var.i2c.baud = 100000;
@@ -143,12 +143,7 @@ void variable_set(const char* key, const char* value)
         } else if (strcmp(key, "spi.baud") == 0) {
             var.spi.baud = to_uint(value);
         } else if (strcmp(key, "spi.autorespond") == 0) {
-            if (strcmp(value, "off") == 0) {
-                var.spi.has_autorespond = false;
-            } else {
-                var.spi.has_autorespond = true;
-                var.spi.autorespond = to_byte(value);
-            }
+            var.spi.autorespond = to_byte(value);
         } else if (strcmp(key, "spi.output") == 0) {
             var.spi.output = to_output(value);
         } else if (strcmp(key, "i2c.baud") == 0) {
@@ -185,10 +180,7 @@ void variables_print()
     printf("spi.cpha        = %d\n", var.spi.cpha);
     printf("spi.order       = %s\n", var.spi.order == LSB ? "lsb" : "msb");
     printf("spi.baud        = %lu\n", var.spi.baud);
-    if (!var.spi.has_autorespond)
-        printf("spi.autorespond = off\n");
-    else
-        printf("spi.autorespond = 0x%02X\n", var.spi.autorespond);
+    printf("spi.autorespond = 0x%02X\n", var.spi.autorespond);
     printf("spi.output      = %s\n", from_output(var.spi.output));
     printf("i2c.baud        = %lu\n", var.i2c.baud);
     printf("i2c.output      = %s\n", from_output(var.i2c.output));

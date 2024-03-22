@@ -29,16 +29,17 @@
 ## UI
 
 ## SPI slave (3x)
-- [ ] Set characteristics
-- [ ] Interact
-- [ ] Interact in background
-- [ ] UI support
+- [ ] Initialize
+- [ ] Listen
+- [ ] Speak
+- [ ] Sniff
+- [ ] Disconnect
 
 ## SPI master (3x)
-- [ ] Set characteristics
-- [ ] Interact
-- [ ] Interact in background
-- [ ] UI support
+- [ ] Initialize
+- [ ] Speak
+- [ ] Listen
+- [ ] Disconnect
       
 ## PWM
 - [ ] Set characteristics
