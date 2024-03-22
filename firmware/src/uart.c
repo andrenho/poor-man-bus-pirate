@@ -88,12 +88,11 @@ void uart_init_()    // make this generic?
 
     for (;;) {
         output_print_queues();
-        int c = getchar_timeout_us(0);
-        if (c != PICO_ERROR_TIMEOUT) {
-            if (c == 0x3) {  // CTRL+C
-                output_print("\n", C_NONE);
-                break;
-            }
+        int c = output_get_char();
+        if (c == CTRL_C) {
+            output_print("\n", C_NONE);
+            break;
+        } else if (c != NO_CHAR) {
             output_queue_add(c, C_OUTPUT);
             uart_putc_raw(uart0, c);
             if (c == 0xd) {

@@ -80,11 +80,11 @@ void spi_slave_init()
 
     for (;;) {
         output_print_queues();
-        int c = getchar_timeout_us(0);
-        if (c == 0x3) {  // CTRL+C
+        int c = output_get_char();
+        if (c == CTRL_C) {
             output_print("\n", C_NONE);
             break;
-        } else if (c != PICO_ERROR_TIMEOUT) {
+        } else if (c != NO_CHAR) {
             next_char = c;
         }
     }

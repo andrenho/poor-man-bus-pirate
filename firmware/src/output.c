@@ -1,6 +1,7 @@
 #include "output.h"
 
 #include <stdio.h>
+#include <pico/stdio.h>
 
 #include "pico/util/queue.h"
 
@@ -100,4 +101,18 @@ void output_print_queues()
     QueueItem item;
     while (queue_try_remove(&queue, &item))
         output_putchar(item.c, item.channel);
+}
+
+int output_get_char()
+{
+    if (output_mode == ASCII) {
+        int c = getchar_timeout_us(0);
+        if (c == 0x3)
+            return CTRL_C;
+        else if (c == PICO_ERROR_TIMEOUT)
+            return NO_CHAR;
+        return c;
+    } else {
+        // TODO ...
+    }
 }
