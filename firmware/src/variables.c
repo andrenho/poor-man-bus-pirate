@@ -49,8 +49,8 @@ void variables_reset()
     var.uart.hflow = false;
     var.uart.output = ASCII;
 
-    var.spi.cpol = 0;
-    var.spi.cpha = 0;
+    var.spi.cpol = 1;
+    var.spi.cpha = 1;
     var.spi.order = MSB;
     var.spi.baud = 100000;
     var.spi.autorespond = 0xff;

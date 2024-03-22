@@ -4,18 +4,21 @@
 
 #include "pico/util/queue.h"
 
-#define QUEUE_COUNT 3
 #define QUEUE_SIZE  512
 
 static Output output_mode = ASCII;
 static Channel  last_color = C_NONE;
 
-queue_t queue[QUEUE_COUNT];
+typedef struct {
+    char    c       : 8;
+    Channel channel : 8;
+} QueueItem;
+
+static queue_t queue;
 
 void output_init()
 {
-    for (size_t i = 0; i < QUEUE_COUNT; ++i)
-        queue_init(&queue[i], 1, QUEUE_SIZE);
+    queue_init(&queue, sizeof(QueueItem), QUEUE_SIZE);
 }
 
 void output_set_mode(Output output)
@@ -86,15 +89,15 @@ static void output_putchar(char c, Channel channel)
 
 void output_queue_add(char c, Channel channel)
 {
-    if (!queue_try_add(&queue[channel], &c)) {
+    QueueItem item = { .c = c, .channel = channel };
+    if (!queue_try_add(&queue, &item)) {
         // TODO - do something if the queue is full
     }
 }
 
 void output_print_queues()
 {
-    char c;
-    for (size_t i = 0; i < QUEUE_COUNT; ++i)
-        while (queue_try_remove(&queue[i], &c))
-            output_putchar(c, i);
+    QueueItem item;
+    while (queue_try_remove(&queue, &item))
+        output_putchar(item.c, item.channel);
 }

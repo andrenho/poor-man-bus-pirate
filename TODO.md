@@ -29,11 +29,12 @@
 ## UI
 
 ## SPI slave (3x)
-- [ ] Initialize
-- [ ] Listen
-- [ ] Speak
-- [ ] Sniff
+- [x] Initialize
+- [x] Listen
 - [ ] Disconnect
+- [ ] Speak
+  - [ ] Get next char as hex, dec, bin...
+- [ ] Sniff
 
 ## SPI master (3x)
 - [ ] Initialize
