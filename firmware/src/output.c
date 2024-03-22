@@ -31,10 +31,10 @@ static void output_set_color(Channel color)
                 printf("\e[1;32m");
                 break;
             case C_OUTPUT:
-                printf("\e[1;36m");
+                printf("\e[1;31m");
                 break;
             case C_SNIFF:
-                printf("\e[1;33m");
+                printf("\e[1;34m");
                 break;
             case C_NONE:
                 printf("\e[0m");

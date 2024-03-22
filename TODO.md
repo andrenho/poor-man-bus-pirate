@@ -11,7 +11,7 @@
   - [x] Makefile - upload via SWD
   - [x] Makefile - upload via USB
 - [x] Basic REPL
-- [ ] Set/get variables
+- [x] Set/get variables
   - [x] Set/get
   - [x] All var code into single source
   - [x] Store/load variables to/from flash
@@ -21,8 +21,9 @@
 ## UART (2x)
 - [x] Initialize
 - [x] Speak
-- [ ] Listen
-- [ ] Sniff
+- [x] Listen
+- [x] Sniff
+- [ ] Disconnect
 - [ ] Guess speed
 
 ## UI
