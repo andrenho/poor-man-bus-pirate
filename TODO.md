@@ -24,7 +24,7 @@
 - [x] Listen
 - [x] Sniff
 - [x] Disconnect
-- [ ] Guess speed
+- [x] Guess speed
 
 ## UI
 

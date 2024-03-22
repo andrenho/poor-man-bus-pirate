@@ -58,6 +58,8 @@ void execute(uint8_t n_tokens, char tokens[MAX_TOKENS][MAX_TOKEN_SZ])
             variable_set(tokens[1], tokens[2]);
         else
             syntax_error();
+    } else if (strcmp(tokens[0], "guess") == 0) {
+        uart_guess_speed();
     } else {
         syntax_error();
     }

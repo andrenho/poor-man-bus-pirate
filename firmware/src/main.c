@@ -12,7 +12,7 @@ int main()
 	stdio_usb_init();
 
     printf("Welcome to Poor Man Bus Pirate!\n");
-    printf("Available commands: set, reset, use\n");
+    printf("Available commands: set, reset, use, guess\n");
 
     output_init();
     variables_load();
