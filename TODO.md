@@ -23,7 +23,7 @@
 - [x] Speak
 - [x] Listen
 - [x] Sniff
-- [ ] Disconnect
+- [x] Disconnect
 - [ ] Guess speed
 
 ## UI

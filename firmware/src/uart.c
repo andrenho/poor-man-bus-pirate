@@ -7,6 +7,10 @@
 #include "variables.h"
 #include "output.h"
 
+#define TX_PIN  0
+#define RX0_PIN 1
+#define RX1_PIN 5
+
 static void on_uart_rx(uart_inst_t* uart, Channel channel)
 {
     while (uart_is_readable(uart)) {
@@ -40,9 +44,9 @@ static void uart_connect_()
                         var.uart.mode[2] - '0',
                         var.uart.mode[1] == 'n' ? UART_PARITY_NONE : (var.uart.mode[1] == 'e' ? UART_PARITY_EVEN : UART_PARITY_ODD));
     }
-    gpio_set_function(0, GPIO_FUNC_UART);
-    gpio_set_function(1, GPIO_FUNC_UART);
-    gpio_set_function(5, GPIO_FUNC_UART);
+    gpio_set_function(TX_PIN, GPIO_FUNC_UART);
+    gpio_set_function(RX0_PIN, GPIO_FUNC_UART);
+    gpio_set_function(RX1_PIN, GPIO_FUNC_UART);
     output_set_mode(var.uart.output);
 
     // print header
@@ -61,6 +65,16 @@ static void uart_connect_()
 
 static void uart_disconnect_()
 {
+    irq_set_enabled(UART0_IRQ, false);
+    irq_set_enabled(UART1_IRQ, false);
+    uart_deinit(uart0);
+    uart_deinit(uart1);
+    gpio_set_function(TX_PIN, GPIO_FUNC_NULL);
+    gpio_set_function(RX0_PIN, GPIO_FUNC_NULL);
+    gpio_set_function(RX1_PIN, GPIO_FUNC_NULL);
+    gpio_set_input_enabled(TX_PIN, true);
+    gpio_set_input_enabled(RX0_PIN, true);
+    gpio_set_input_enabled(RX1_PIN, true);
 }
 
 void uart_init_()    // make this generic?
