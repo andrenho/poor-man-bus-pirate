@@ -19,8 +19,10 @@ add_executable(${CMAKE_PROJECT_NAME}
 		src/uart.h
 		src/output.c
 		src/output.h
-		src/spi.c
-		src/spi.h
+		src/spi_slave.c
+		src/spi_slave.h
+		src/spi_master.c
+		src/spi_master.h
 )
 
 add_custom_command(TARGET ${CMAKE_PROJECT_NAME}

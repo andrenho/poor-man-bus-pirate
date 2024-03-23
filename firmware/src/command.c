@@ -5,7 +5,7 @@
 
 #include "uart.h"
 #include "variables.h"
-#include "spi.h"
+#include "spi_slave.h"
 
 #define MAX_TOKENS 6
 #define MAX_TOKEN_SZ 20

@@ -1,4 +1,4 @@
-#include "spi.h"
+#include "spi_slave.h"
 
 #include <hardware/spi.h>
 #include <hardware/gpio.h>
