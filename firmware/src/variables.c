@@ -91,16 +91,23 @@ static bool to_bool(const char* value)
 
 static Output to_output(const char* value)
 {
+    Output output;
     if (strcmp(value, "ascii") == 0)
-        return ASCII;
+        output = ASCII;
     else if (strcmp(value, "dec") == 0)
-        return DEC;
+        output = DEC;
     else if (strcmp(value, "bin") == 0)
-        return BIN;
+        output = BIN;
     else if (strcmp(value, "hex") == 0)
-        return HEX;
+        output = HEX;
     else
         longjmp(variable_error, 1);
+
+    if (output != ASCII)
+        printf("For this output type, when talking with other devices, type the desired character and press ENTER. "
+               "There will be no output while typing, only when ENTER is pressed.\n");
+
+    return output;
 }
 
 static Order to_order(const char* value)

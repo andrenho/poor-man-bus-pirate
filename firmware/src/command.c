@@ -6,6 +6,7 @@
 #include "uart.h"
 #include "variables.h"
 #include "spi_slave.h"
+#include "spi_master.h"
 
 #define MAX_TOKENS 6
 #define MAX_TOKEN_SZ 20
@@ -38,6 +39,7 @@ void execute(uint8_t n_tokens, char tokens[MAX_TOKENS][MAX_TOKEN_SZ])
             if (strcmp(tokens[1], "uart") == 0) {
                 uart_init_();
             } else if (strcmp(tokens[1], "spi_master") == 0) {
+                spi_master_init();
             } else if (strcmp(tokens[1], "spi_slave") == 0) {
                 spi_slave_init(false);
             } else if (strcmp(tokens[1], "spi_sniff") == 0) {
