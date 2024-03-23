@@ -14,9 +14,9 @@ static void spi_master_connect()
 {
     // setup
     spi_init(spi0, var.spi.baud);
-    spi_set_slave(spi0, true);
     spi_set_format(spi0, 8, var.spi.cpol, var.spi.cpha,
                    var.spi.order == MSB ? SPI_MSB_FIRST : SPI_LSB_FIRST);
+    output_set_mode(var.spi.output);
 
     // setup pins
     gpio_set_function(RX_PIN, GPIO_FUNC_SPI);

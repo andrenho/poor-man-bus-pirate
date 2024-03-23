@@ -37,10 +37,10 @@
 - [x] Sniff
 
 ## SPI master (3x)
-- [ ] Initialize
-- [ ] Speak
-- [ ] Listen
-- [ ] Disconnect
+- [x] Initialize
+- [x] Speak
+- [x] Listen
+- [x] Disconnect
       
 ## PWM
 - [ ] Set characteristics
