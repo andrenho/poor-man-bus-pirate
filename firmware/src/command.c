@@ -7,6 +7,7 @@
 #include "variables.h"
 #include "spi_slave.h"
 #include "spi_master.h"
+#include "pwm.h"
 
 #define MAX_TOKENS 6
 #define MAX_TOKEN_SZ 20
@@ -34,8 +35,8 @@ void execute(uint8_t n_tokens, char tokens[MAX_TOKENS][MAX_TOKEN_SZ])
 
     if (strcmp(tokens[0], "use") == 0) {
         if (n_tokens == 1) {
-            printf("Options: uart, spi_master, spi_slave, spi_sniff, i2c_master, i2c_salve, pmw0, pmw1\n");
-        } else if (n_tokens == 2) {
+            printf("Options: uart, spi_master, spi_slave, spi_sniff, i2c_master, i2c_salve, pmw\n");
+        } else if (n_tokens >= 2) {
             if (strcmp(tokens[1], "uart") == 0) {
                 uart_init_();
             } else if (strcmp(tokens[1], "spi_master") == 0) {
@@ -46,8 +47,15 @@ void execute(uint8_t n_tokens, char tokens[MAX_TOKENS][MAX_TOKEN_SZ])
                 spi_slave_init(true);
             } else if (strcmp(tokens[1], "i2c_master") == 0) {
             } else if (strcmp(tokens[1], "i2c_slave") == 0) {
-            } else if (strcmp(tokens[1], "pwm0") == 0) {
-            } else if (strcmp(tokens[1], "pwm1") == 0) {
+            } else if (strcmp(tokens[1], "pwm") == 0) {
+                if (n_tokens == 2)
+                    printf("Options: on, off");
+                else if (n_tokens == 3 && strcmp(tokens[2], "on"))
+                    pwm_on();
+                else if (n_tokens == 3 && strcmp(tokens[2], "off"))
+                    pwm_off();
+                else
+                    syntax_error();
             } else {
                 syntax_error();
             }

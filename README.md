@@ -13,7 +13,7 @@ A very basic bus sniffer and communicator (UART, SPI, I2C, etc). A simplified (a
 |--------|------|------------|-----------|-----------|--------------|--------------|--------------------|
 | COMM0  | TX   | MISO       | MOSI      | RX0       | SDA          | PWM0         | GP0 (1)            |
 | COMM1  | RX0  | CS         | SS        | SS        | SCL          |              | GP1 (2)            |
-| COMM2  | CTS  | SCK        | SCK       | SCK       |              | PMW1         | GP2 (4), GP10 (14) |
+| COMM2  | CTS  | SCK        | SCK       | SCK       |              |              | GP2 (4), GP10 (14) |
 | COMM3  | RTS  | MOSI       | MISO      |           |              |              | GP3 (5)            |
 | COMM4  | RX1  |            |           | RX1       |              |              | GP5 (7), GP8 (11)  |
 | GND    |      |            |           |           |              |              | GND                |

@@ -30,9 +30,15 @@ typedef struct {
 } I2CConfig;
 
 typedef struct {
+    uint32_t freq;
+    uint16_t duty;
+} PWMConfig;
+
+typedef struct {
     UARTConfig uart;
     SPIConfig  spi;
     I2CConfig  i2c;
+    PWMConfig  pwm;
 } Config;
 
 extern Config var;
