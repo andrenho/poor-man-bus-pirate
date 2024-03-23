@@ -34,7 +34,7 @@
 - [x] Disconnect
 - [x] Speak
   - [x] Get next char as hex, dec, bin...
-- [ ] Sniff
+- [x] Sniff
 
 ## SPI master (3x)
 - [ ] Initialize

@@ -7,23 +7,45 @@
 
 #include "output.h"
 
-#define RX0_PIN  0
-#define RX1_PIN  8
-#define TX_PIN   3
-#define SCK_PIN  2
-#define CS_PIN   1
+#define RX0_PIN   0
+#define CS0_PIN   1
+#define SCK0_PIN  2
+#define TX_PIN    3
+
+#define RX1_PIN   8
+#define CS1_PIN   9
+#define SCK1_PIN 10
 
 static volatile char next_char = 0x0;
+static volatile bool print_output = true;
 
 static void on_spi0_xchg()
 {
     uint8_t c;
     while (spi_is_readable(spi0)) {
-        output_queue_add(next_char, C_OUTPUT);
+        if (print_output)
+            output_queue_add(next_char, C_OUTPUT);
         spi_read_blocking(spi0, next_char, &c, 1);
         next_char = var.spi.autorespond;
         output_queue_add(c, C_INPUT);
     }
+}
+
+static void on_spi1_xchg()
+{
+    uint8_t c;
+    while (spi_is_readable(spi1)) {
+        spi_read_blocking(spi1, var.spi.autorespond, &c, 1);  // what we're sending doesn't matter, as TX1 is disconnected
+        output_queue_add(c, C_SNIFF);
+    }
+}
+
+static void spi_slave_setup(spi_inst_t* spi)
+{
+    spi_init(spi, var.spi.baud);
+    spi_set_slave(spi, true);
+    spi_set_format(spi, 8, var.spi.cpol, var.spi.cpha,
+                   var.spi.order == MSB ? SPI_MSB_FIRST : SPI_LSB_FIRST);
 }
 
 static void spi_slave_connect()
@@ -32,19 +54,12 @@ static void spi_slave_connect()
         printf("Warning: due to a RPi Pico limitation, if CPHA=0 and CPOL=0, CS line must be asserted high between bytes!\n");
 
     // setup SPI
-    spi_init(spi0, var.spi.baud);
-    spi_set_slave(spi0, true);
-    spi_set_format(spi0, 8, var.spi.cpol, var.spi.cpha,
-                   var.spi.order == MSB ? SPI_MSB_FIRST : SPI_LSB_FIRST);
+    spi_slave_setup(spi0);
     gpio_set_function(RX0_PIN, GPIO_FUNC_SPI);
     gpio_set_function(TX_PIN, GPIO_FUNC_SPI);
-    gpio_set_function(SCK_PIN, GPIO_FUNC_SPI);
-    gpio_set_function(CS_PIN, GPIO_FUNC_SPI);
+    gpio_set_function(SCK0_PIN, GPIO_FUNC_SPI);
+    gpio_set_function(CS0_PIN, GPIO_FUNC_SPI);
     output_set_mode(var.spi.output);
-
-    // print header
-    output_print("MOSI ", C_INPUT);
-    output_print("MISO\n", C_OUTPUT);
 
     // Enable the RX FIFO interrupt (RXIM)
     spi0_hw->imsc = 1 << 2;
@@ -52,6 +67,23 @@ static void spi_slave_connect()
     // setup interrupt
     irq_set_enabled(SPI0_IRQ, true);
     irq_set_exclusive_handler(SPI0_IRQ, on_spi0_xchg);
+}
+
+static void spi_sniff_connect()
+{
+    spi_slave_setup(spi1);
+
+    // setup SPI
+    gpio_set_function(RX1_PIN, GPIO_FUNC_SPI);
+    gpio_set_function(SCK1_PIN, GPIO_FUNC_SPI);
+    gpio_set_function(CS1_PIN, GPIO_FUNC_SPI);
+
+    // Enable the RX FIFO interrupt (RXIM)
+    spi1_hw->imsc = 1 << 2;
+
+    // setup interrupt
+    irq_set_enabled(SPI1_IRQ, true);
+    irq_set_exclusive_handler(SPI1_IRQ, on_spi1_xchg);
 }
 
 static void spi_disconnect()
@@ -63,18 +95,33 @@ static void spi_disconnect()
     gpio_set_function(RX0_PIN, GPIO_FUNC_NULL);
     gpio_set_function(RX1_PIN, GPIO_FUNC_NULL);
     gpio_set_function(TX_PIN, GPIO_FUNC_NULL);
-    gpio_set_function(SCK_PIN, GPIO_FUNC_NULL);
-    gpio_set_function(CS_PIN, GPIO_FUNC_NULL);
+    gpio_set_function(SCK0_PIN, GPIO_FUNC_NULL);
+    gpio_set_function(CS0_PIN, GPIO_FUNC_NULL);
+    gpio_set_function(SCK1_PIN, GPIO_FUNC_NULL);
+    gpio_set_function(CS1_PIN, GPIO_FUNC_NULL);
     gpio_set_input_enabled(RX0_PIN, true);
     gpio_set_input_enabled(RX1_PIN, true);
     gpio_set_input_enabled(TX_PIN, true);
-    gpio_set_input_enabled(SCK_PIN, true);
-    gpio_set_input_enabled(CS_PIN, true);
+    gpio_set_input_enabled(SCK0_PIN, true);
+    gpio_set_input_enabled(CS0_PIN, true);
+    gpio_set_input_enabled(SCK1_PIN, true);
+    gpio_set_input_enabled(CS1_PIN, true);
 }
 
-void spi_slave_init()
+void spi_slave_init(bool sniff)
 {
+    print_output = !sniff;
+
     spi_slave_connect();
+    if (sniff)
+        spi_sniff_connect();
+
+    // print header
+    output_print("MOSI0 ", C_INPUT);
+    if (!sniff)
+        output_print("MISO\n", C_OUTPUT);
+    else
+        output_print("MOSI1\n", C_SNIFF);
 
     next_char = var.spi.autorespond;
 

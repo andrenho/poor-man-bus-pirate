@@ -39,7 +39,9 @@ void execute(uint8_t n_tokens, char tokens[MAX_TOKENS][MAX_TOKEN_SZ])
                 uart_init_();
             } else if (strcmp(tokens[1], "spi_master") == 0) {
             } else if (strcmp(tokens[1], "spi_slave") == 0) {
-                spi_slave_init();
+                spi_slave_init(false);
+            } else if (strcmp(tokens[1], "spi_sniff") == 0) {
+                spi_slave_init(true);
             } else if (strcmp(tokens[1], "i2c_master") == 0) {
             } else if (strcmp(tokens[1], "i2c_slave") == 0) {
             } else if (strcmp(tokens[1], "pwm0") == 0) {
