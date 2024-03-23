@@ -31,9 +31,9 @@
 ## SPI slave (3x)
 - [x] Initialize
 - [x] Listen
-- [ ] Disconnect
-- [ ] Speak
-  - [ ] Get next char as hex, dec, bin...
+- [x] Disconnect
+- [x] Speak
+  - [x] Get next char as hex, dec, bin...
 - [ ] Sniff
 
 ## SPI master (3x)

@@ -2,13 +2,19 @@
 
 #include <stdio.h>
 #include <pico/stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <limits.h>
 
 #include "pico/util/queue.h"
 
 #define QUEUE_SIZE  512
+#define INPUT_MAX   9
 
-static Output output_mode = ASCII;
-static Channel  last_color = C_NONE;
+static Output  output_mode = ASCII;
+static Channel last_color = C_NONE;
+static char    input[INPUT_MAX] = {0};
 
 typedef struct {
     char    c       : 8;
@@ -54,10 +60,9 @@ void output_print(const char* s, Channel channel)
     printf("%s", s);
 }
 
-#define CHAR_BIT 8
 static int printb(uintmax_t n)
 {
-    char b[(sizeof n * CHAR_BIT) + 1];
+    char b[(sizeof n * 8) + 1];
     char *p = b + sizeof b;
     *--p = '\0';
     do {
@@ -105,14 +110,38 @@ void output_print_queues()
 
 int output_get_char()
 {
+    int c = getchar_timeout_us(0);
+    if (c == 0x3)
+        return CTRL_C;
+    else if (c == PICO_ERROR_TIMEOUT)
+        return NO_CHAR;
+
     if (output_mode == ASCII) {
-        int c = getchar_timeout_us(0);
-        if (c == 0x3)
-            return CTRL_C;
-        else if (c == PICO_ERROR_TIMEOUT)
-            return NO_CHAR;
         return c;
     } else {
-        // TODO ...
+        unsigned int len = strlen(input);
+        if (isxdigit(c) && len < INPUT_MAX) {
+            input[len] = c;
+            input[len+1] = '\0';
+            return NO_CHAR;
+        } else if (c != '\r' && c != '\n') {
+            return NO_CHAR;
+        } else {  // enter
+            unsigned long v = strtoul(input, NULL, output_mode == DEC ? 10 : (output_mode == HEX ? 16 : 2));
+            output_set_color(C_NONE);
+            if (v == ULONG_MAX || v > 0xff) {
+                printf("[ERR]");
+                input[0] = '\0';
+                return NO_CHAR;
+            } else if (output_mode == HEX) {
+                printf("[%02X]", (unsigned int) v);
+            } else if (output_mode == DEC) {
+                printf("[%d]", (unsigned int) v);
+            } else if (output_mode == BIN) {
+                printb(v);
+            }
+            input[0] = '\0';
+            return ((int) v) & 0xff;
+        }
     }
 }
