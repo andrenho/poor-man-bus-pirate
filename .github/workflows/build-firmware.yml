@@ -5,8 +5,6 @@ on:
     # Pattern matched against refs/tags
     tags:        
       - '*'           # Push events to every tag not containing /
-    branches:
-      - 'master'
 
 env:
   BUILD_TYPE: Release
@@ -46,3 +44,12 @@ jobs:
     - name: Prepare package
       run:
         zip poor-man-bus-pirate-${{ github.ref_name }}.zip firmware/build/poor-man-bus-pirate.elf firmware/build/poor-man-bus-pirate.uf2 firmware/build/poor-man-bus-pirate.bin
+
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: poor-man-bus-pirate-${{ github.ref_name }}.zip
+        asset_name: poor-man-bus-pirate-${{ github.ref_name }}.zip
+        tag: ${{ github.ref }}
+        overwrite: true
