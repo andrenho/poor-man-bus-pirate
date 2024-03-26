@@ -19,6 +19,8 @@ int main()
     gpio_set_dir(LED_PIN, GPIO_OUT);
     gpio_put(LED_PIN, 1);
 
+    getchar();
+
     printf("Welcome to Poor Man Bus Pirate!\n");
     printf("Available commands: set, reset, use, guess\n");
 

@@ -53,5 +53,9 @@
 
 ## Finalization
 - [x] Create circuit
-- [ ] Add info to circuit
-- [ ] Create page (video?)
+- [x] Add info to circuit
+- [x] Create page (video?)
+- [ ] Create github actions
+  - [ ] Build
+  - [ ] Create release
+  - [ ] Instructions on how to upload the image
