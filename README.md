@@ -1,13 +1,20 @@
 # Poor man's Bus Pirate
-A very basic bus sniffer and communicator (UART, SPI, I2C, etc). A simplified (and cheaper) version of the [Bus Pirate](https://dangerousprototypes.com/docs/Bus_Pirate).
 
-![image](https://github.com/andrenho/poor-man-bus-pirate/assets/84652/6b8cda69-5a8c-4264-a6e0-ec4868ee3aef)
+A very basic bus sniffer and communicator (UART, SPI, I2C, etc). A simplified (and cheaper) version of the [Bus Pirate](https://dangerousprototypes.com/docs/Bus_Pirate).
 
 ## Features
 
-- Connect to PC via USB (USB also powers the circuit)
-- Protocols supported: UART, SPI (master, slave, sniffing), I2C, PWM
-- LEDs for all communication pins
+The circuit allows:
+  - Sniffing communication between components and printing the results on the computer screen
+  - Communicating with components via serial protocols
+
+- Supported input/output formats: ASCII, hexadecimal, decimal and binary
+- Supported protocols: 
+  - UART (with or without hardware flow control)
+    - Also baud autodetect
+  - SPI (master, slave, sniffing)
+  - I2C (not implemented yet)
+  - PWM output
 
 ## Pinout
 
@@ -23,7 +30,7 @@ A very basic bus sniffer and communicator (UART, SPI, I2C, etc). A simplified (a
 ## Commands
 
 - General
-  - `use [ uart | spi_master | spi_slave | spi_sniff | i2c_master | i2c_slave | pwm0 | pwm1 ]
+  - `use [ uart | spi_master | spi_slave | spi_sniff | pwm ]
   - `reset` (reset all options to default)
   - `set` (print all variables)
 - UART
@@ -31,6 +38,7 @@ A very basic bus sniffer and communicator (UART, SPI, I2C, etc). A simplified (a
   - `set uart.mode [MMM]` (default: 8N1)
   - `set uart.hflow [on | off]` (default: off)
   - `set uart.output [ascii | dec | bin | hex]` (default: ascii)
+  - `guess uart`: tries to autodetect baudrate
 - SPI
   - `set spi.cpol [0 | 1]` (default: 0)
   - `set spi.cpha [0 | 1]` (default: 0)
@@ -42,6 +50,12 @@ A very basic bus sniffer and communicator (UART, SPI, I2C, etc). A simplified (a
   - `set i2c.baud [NNNN]` (baud rate in Hz, master only, default: 100000)
   - `set i2c.output [ascii | dec | bin | hex]` (default: hex)
 - PWM
-  - TODO
+  - `set pwm.freq [NNNN]` (frequency in Hz, default: 100000)
+  - `set pwm.duty [NN]` (% duty cycle, default: 50)
 
-Options are saved on RPI, and persist after a reboot.
+Settings are saved on flash, and persist after a reboot.
+
+# Implementation
+
+![image](https://github.com/andrenho/poor-man-bus-pirate/assets/84652/6b8cda69-5a8c-4264-a6e0-ec4868ee3aef)
+
