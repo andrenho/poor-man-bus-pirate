@@ -28,6 +28,8 @@ This circuit can be used to either sniff communication between components (such 
 
 ## Commands
 
+Connect the Pico USB to the computer, and then open a serial terminal to the USB port at 115200 baud.
+
 - General
   - `use [ uart | spi_master | spi_slave | spi_sniff | pwm ]`
   - `reset` (reset all options to default)
@@ -53,6 +55,10 @@ This circuit can be used to either sniff communication between components (such 
   - `set pwm.duty [NN]` (% duty cycle, default: 50)
 
 Settings are saved on flash, and persist after a reboot.
+
+Communication example:
+
+![image](https://github.com/andrenho/poor-man-bus-pirate/assets/84652/18411b9d-3f05-4c4b-a21a-cb78f8430f43)
 
 # Circuit
 
