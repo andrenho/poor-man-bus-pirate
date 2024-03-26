@@ -43,6 +43,8 @@ Connect the Pico USB to the computer, and then open a serial terminal to the USB
   - `set pwm.freq [NNNN]` (frequency in Hz, default: 100000)
   - `set pwm.duty [NN]` (% duty cycle, default: 50)
 
+Press `CTRL+C` to end communication with a protocol at any time.
+
 Settings are saved on flash, and persist after a reboot.
 
 Communication example:
