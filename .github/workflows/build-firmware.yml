@@ -27,7 +27,7 @@ jobs:
       run: |
         git clone -b master https://github.com/raspberrypi/pico-sdk.git
         cd pico-sdk
-        git submodule update --init
+        git submodule update -j4 --init
         cd ..
 
     - name: Configure CMake
@@ -42,3 +42,7 @@ jobs:
         cd firmware/build
         export PICO_SDK_PATH=/home/runner/work/poor-man-bus-pirate/poor-man-bus-pirate/pico-sdk
         make
+
+    - name: Prepare package
+      run:
+        zip poor-man-bus-pirate-${{ github.ref_name }}.zip firmware/build/poor-man-bus-pirate.elf firmware/build/poor-man-bus-pirate.uf2 firmware/build/poor-man-bus-pirate.bin
