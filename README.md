@@ -1,6 +1,8 @@
 # poor-man-bus-pirate
 A very basic bus sniffer and communicator (UART, SPI, I2C, etc). A simplified (and cheaper) version of Bus Pirate.
 
+![image](https://github.com/andrenho/poor-man-bus-pirate/assets/84652/6b8cda69-5a8c-4264-a6e0-ec4868ee3aef)
+
 ## Features
 
 - Connect to PC via USB (USB also powers the circuit)
