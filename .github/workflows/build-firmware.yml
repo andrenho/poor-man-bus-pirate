@@ -5,6 +5,8 @@ on:
     # Pattern matched against refs/tags
     tags:        
       - '*'           # Push events to every tag not containing /
+    branches:
+      - 'master'
 
 env:
   BUILD_TYPE: Release
