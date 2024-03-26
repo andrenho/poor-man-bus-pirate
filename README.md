@@ -9,7 +9,7 @@ This circuit can be used to either sniff communication between components (such 
 - Supported input/output formats: ASCII, hexadecimal, decimal and binary
 - Supported protocols: 
   - **UART** (with or without hardware flow control)
-    - Also baud autodetect
+    - Baud autodetect
   - **SPI** (master, slave, sniffing)
   - **I2C** (not implemented yet)
   - **PWM** output
@@ -17,19 +17,19 @@ This circuit can be used to either sniff communication between components (such 
 
 ## Pinout
 
-| BP pin | UART | SPI master | SPI slave | SPI sniff | I2C function | PWM function | RPi Pico pin       |
-|--------|------|------------|-----------|-----------|--------------|--------------|--------------------|
-| COMM0  | TX   | MISO       | MOSI      | RX0       | SDA          | PWM0         | GP0 (1)            |
-| COMM1  | RX0  | CS         | SS        | SS        | SCL          |              | GP1 (2)            |
-| COMM2  | CTS  | SCK        | SCK       | SCK       |              |              | GP2 (4), GP10 (14) |
-| COMM3  | RTS  | MOSI       | MISO      |           |              |              | GP3 (5)            |
-| COMM4  | RX1  |            |           | RX1       |              |              | GP5 (7), GP8 (11)  |
-| GND    |      |            |           |           |              |              | GND                |
+| BP pin     | UART | SPI master | SPI slave | SPI sniff | I2C function | PWM function | RPi Pico pin       |
+|------------|------|------------|-----------|-----------|--------------|--------------|--------------------|
+| **COMM0**  | TX   | MISO       | MOSI      | RX0       | SDA          | PWM0         | GP0 (1)            |
+| **COMM1**  | RX0  | CS         | SS        | SS        | SCL          |              | GP1 (2)            |
+| **COMM2**  | CTS  | SCK        | SCK       | SCK       |              |              | GP2 (4), GP10 (14) |
+| **COMM3**  | RTS  | MOSI       | MISO      |           |              |              | GP3 (5)            |
+| **COMM4**  | RX1  |            |           | RX1       |              |              | GP5 (7), GP8 (11)  |
+| **GND**    |      |            |           |           |              |              | GND                |
 
 ## Commands
 
 - General
-  - `use [ uart | spi_master | spi_slave | spi_sniff | pwm ]
+  - `use [ uart | spi_master | spi_slave | spi_sniff | pwm ]`
   - `reset` (reset all options to default)
   - `set` (print all variables)
 - UART
@@ -70,6 +70,8 @@ This section is optional, and adds blinking lights to communication channels to 
 
 
 # Implementation
+
+This is the circuit I implemented for my personal use:
 
 ![image](https://github.com/andrenho/poor-man-bus-pirate/assets/84652/6b8cda69-5a8c-4264-a6e0-ec4868ee3aef)
 
