@@ -18,6 +18,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: ls
+      run: ls
+
     - name: Configure CMake
       run: cmake -B firmware/src/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
