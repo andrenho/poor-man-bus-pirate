@@ -4,17 +4,15 @@ A very basic bus sniffer and communicator (UART, SPI, I2C, etc). A simplified (a
 
 ## Features
 
-The circuit allows:
-  - Sniffing communication between components and printing the results on the computer screen
-  - Communicating with components via serial protocols
+This circuit can be used to either sniff communication between components (such as microcontrollers), or to directly communicate with the components using the computer.
 
 - Supported input/output formats: ASCII, hexadecimal, decimal and binary
 - Supported protocols: 
-  - UART (with or without hardware flow control)
+  - **UART** (with or without hardware flow control)
     - Also baud autodetect
-  - SPI (master, slave, sniffing)
-  - I2C (not implemented yet)
-  - PWM output
+  - **SPI** (master, slave, sniffing)
+  - **I2C** (not implemented yet)
+  - **PWM** output
 - Supported I/O voltages: 3.3V and 5V
 
 ## Pinout
