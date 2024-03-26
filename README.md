@@ -15,6 +15,7 @@ The circuit allows:
   - SPI (master, slave, sniffing)
   - I2C (not implemented yet)
   - PWM output
+- Supported I/O voltages: 3.3V and 5V
 
 ## Pinout
 
@@ -54,6 +55,21 @@ The circuit allows:
   - `set pwm.duty [NN]` (% duty cycle, default: 50)
 
 Settings are saved on flash, and persist after a reboot.
+
+# Circuit
+
+This section is mandatory - it provides the computer interface, and allows communicating with components at 3.3V.
+
+![image](https://github.com/andrenho/poor-man-bus-pirate/assets/84652/44ba63c5-f81d-4478-bd14-66dc913552da)
+
+This section is optional, and allows for communicating with 5V devices as well.
+
+![image](https://github.com/andrenho/poor-man-bus-pirate/assets/84652/5a567604-431e-45d2-851b-0d46df98cebb)
+
+This section is optional, and adds blinking lights to communication channels to indicate activity.
+
+![image](https://github.com/andrenho/poor-man-bus-pirate/assets/84652/0d1dda8b-4ede-4791-a77b-8b5e4be25a43)
+
 
 # Implementation
 
