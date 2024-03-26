@@ -27,7 +27,7 @@ jobs:
       run: |
         git clone -b master https://github.com/raspberrypi/pico-sdk.git
         cd pico-sdk
-        git submodule update -j4 --init
+        git submodule update --init
         cd ..
 
     - name: Configure CMake
