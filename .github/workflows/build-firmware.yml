@@ -18,8 +18,19 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: ls
-      run: ls
+    - name: Install dependencies
+      run: |
+        apt update
+        apt install cmake gcc-arm-none-eabi libnewlib-arm-none-eabi build-essential 
+
+    - name: Install Pico SDK
+      run: |
+        git clone -b master https://github.com/raspberrypi/pico-sdk.git
+        export PICO_SDK_PATH=`pwd`/pico-sdk
+        echo $PICO_SDK_PATH
+        cd pico-sdk
+        git submodule update --init
+        cd ..
 
     - name: Configure CMake
       run: |
