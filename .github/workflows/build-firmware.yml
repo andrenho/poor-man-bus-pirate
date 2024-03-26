@@ -23,11 +23,11 @@ jobs:
 
     - name: Configure CMake
       run: |
-        mkdir -p firmware/src/build
-        cd firmware/src/build
+        mkdir -p firmware/build
+        cd firmware/build
         cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} ..
 
     - name: Build
       run: |
-        cd firmware/src/build
+        cd firmware/build
         make
