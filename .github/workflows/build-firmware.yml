@@ -25,10 +25,9 @@ jobs:
       run: |
         mkdir -p firmware/src/build
         cd firmware/src/build
-        cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+        cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} ..
 
     - name: Build
       run: |
-        mkdir -p firmware/src/build
         cd firmware/src/build
         make
