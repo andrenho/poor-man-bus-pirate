@@ -26,8 +26,6 @@ jobs:
     - name: Install Pico SDK
       run: |
         git clone -b master https://github.com/raspberrypi/pico-sdk.git
-        export PICO_SDK_PATH=`pwd`/pico-sdk
-        echo $PICO_SDK_PATH
         cd pico-sdk
         git submodule update --init
         cd ..
@@ -36,9 +34,11 @@ jobs:
       run: |
         mkdir -p firmware/build
         cd firmware/build
+        export PICO_SDK_PATH=/home/runner/work/poor-man-bus-pirate/poor-man-bus-pirate/pico-sdk
         cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} ..
 
     - name: Build
       run: |
         cd firmware/build
+        export PICO_SDK_PATH=/home/runner/work/poor-man-bus-pirate/poor-man-bus-pirate/pico-sdk
         make
