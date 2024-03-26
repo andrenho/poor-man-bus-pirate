@@ -44,7 +44,7 @@ jobs:
 
     - name: Prepare package
       run:
-        zip poor-man-bus-pirate-${{ github.ref_name }}.zip firmware/build/poor-man-bus-pirate.elf firmware/build/poor-man-bus-pirate.uf2 firmware/build/poor-man-bus-pirate.bin
+        zip -j poor-man-bus-pirate-${{ github.ref_name }}.zip firmware/build/poor-man-bus-pirate.elf firmware/build/poor-man-bus-pirate.uf2 firmware/build/poor-man-bus-pirate.bin
 
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
