@@ -43,18 +43,15 @@
 - [x] Disconnect
       
 ## PWM
-- [ ] Set characteristics
-- [ ] Interact
-- [ ] UI support
-
-## Parallel
-- [ ] Set characteristics
-- [ ] Interact
-- [ ] Interact in background
-- [ ] UI support
+- [x] On/off
 
 ## I2C support
 - [ ] Set characteristics
 - [ ] Interact
 - [ ] Interact in background
 - [ ] UI support
+
+## Finalization
+- [ ] Create circuit
+- [ ] Add info to circuit
+- [ ] Create page (video?)

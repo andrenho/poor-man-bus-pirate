@@ -9,6 +9,7 @@
 #include <hardware/sync.h>
 
 #include "command.h"
+#include "pwm.h"
 
 #define FLASH_TARGET_OFFSET (3 * 512 * 1024)  // top quadrant of memory
 
@@ -58,6 +59,9 @@ void variables_reset()
 
     var.i2c.baud = 100000;
     var.i2c.output = HEX;
+
+    var.pwm.freq = 100000;
+    var.pwm.duty = 50;
 
     variables_save();
 }
@@ -157,6 +161,14 @@ void variable_set(const char* key, const char* value)
             var.i2c.baud = to_uint(value);
         } else if (strcmp(key, "i2c.output") == 0) {
             var.i2c.output = to_output(value);
+        } else if (strcmp(key, "pwm.freq") == 0) {
+            var.pwm.freq = to_uint(value);
+            if (pwm_is_on)
+                pwm_on();
+        } else if (strcmp(key, "pwm.duty") == 0) {
+            var.pwm.duty = to_uint(value);
+            if (pwm_is_on)
+                pwm_on();
         } else {
             syntax_error();
             return;
@@ -179,16 +191,18 @@ const char* from_output(Output output)
 
 void variables_print()
 {
-    printf("uart.baud       = %lu\n", var.uart.baud);
+    printf("uart.baud       = %lu baud\n", var.uart.baud);
     printf("uart.mode       = %s\n", var.uart.mode);
     printf("uart.hflow      = %s\n", var.uart.hflow ? "on" : "off");
     printf("uart.output     = %s\n", from_output(var.uart.output));
     printf("spi.cpol        = %d\n", var.spi.cpol);
     printf("spi.cpha        = %d\n", var.spi.cpha);
     printf("spi.order       = %s\n", var.spi.order == LSB ? "lsb" : "msb");
-    printf("spi.baud        = %lu\n", var.spi.baud);
+    printf("spi.baud        = %lu baud\n", var.spi.baud);
     printf("spi.autorespond = 0x%02X\n", var.spi.autorespond);
     printf("spi.output      = %s\n", from_output(var.spi.output));
-    printf("i2c.baud        = %lu\n", var.i2c.baud);
+    printf("i2c.baud        = %lu baud\n", var.i2c.baud);
     printf("i2c.output      = %s\n", from_output(var.i2c.output));
+    printf("pwm.freq        = %lu Hz\n", var.pwm.freq);
+    printf("pwm.duty        = %u %%\n", var.pwm.duty);
 }

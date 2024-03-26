@@ -49,10 +49,10 @@ void execute(uint8_t n_tokens, char tokens[MAX_TOKENS][MAX_TOKEN_SZ])
             } else if (strcmp(tokens[1], "i2c_slave") == 0) {
             } else if (strcmp(tokens[1], "pwm") == 0) {
                 if (n_tokens == 2)
-                    printf("Options: on, off");
-                else if (n_tokens == 3 && strcmp(tokens[2], "on"))
+                    printf("Options: on, off\n");
+                else if (n_tokens == 3 && strcmp(tokens[2], "on") == 0)
                     pwm_on();
-                else if (n_tokens == 3 && strcmp(tokens[2], "off"))
+                else if (n_tokens == 3 && strcmp(tokens[2], "off") == 0)
                     pwm_off();
                 else
                     syntax_error();
