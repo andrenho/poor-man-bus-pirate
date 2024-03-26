@@ -25,6 +25,8 @@ add_executable(${CMAKE_PROJECT_NAME}
 		src/spi_master.h
 		src/pwm.c
 		src/pwm.h
+		src/pins.c
+		src/pins.h
 )
 
 add_custom_command(TARGET ${CMAKE_PROJECT_NAME}

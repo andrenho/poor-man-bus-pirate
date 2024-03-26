@@ -8,6 +8,7 @@
 
 #include "variables.h"
 #include "output.h"
+#include "pins.h"
 
 #define TX_PIN  0
 #define RX0_PIN 1
@@ -74,12 +75,7 @@ static void uart_disconnect_()
     irq_set_enabled(UART1_IRQ, false);
     uart_deinit(uart0);
     uart_deinit(uart1);
-    gpio_set_function(TX_PIN, GPIO_FUNC_NULL);
-    gpio_set_function(RX0_PIN, GPIO_FUNC_NULL);
-    gpio_set_function(RX1_PIN, GPIO_FUNC_NULL);
-    gpio_set_input_enabled(TX_PIN, true);
-    gpio_set_input_enabled(RX0_PIN, true);
-    gpio_set_input_enabled(RX1_PIN, true);
+    pins_reset();
 }
 
 void uart_init_()    // make this generic?

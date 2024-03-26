@@ -52,6 +52,6 @@
 - [ ] UI support
 
 ## Finalization
-- [ ] Create circuit
+- [x] Create circuit
 - [ ] Add info to circuit
 - [ ] Create page (video?)

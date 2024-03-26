@@ -6,6 +6,7 @@
 #include <stdio.h>
 
 #include "output.h"
+#include "pins.h"
 
 #define RX0_PIN   0
 #define CS0_PIN   1
@@ -92,20 +93,7 @@ static void spi_disconnect()
     irq_set_enabled(SPI1_IRQ, false);
     spi_deinit(spi0);
     spi_deinit(spi1);
-    gpio_set_function(RX0_PIN, GPIO_FUNC_NULL);
-    gpio_set_function(RX1_PIN, GPIO_FUNC_NULL);
-    gpio_set_function(TX_PIN, GPIO_FUNC_NULL);
-    gpio_set_function(SCK0_PIN, GPIO_FUNC_NULL);
-    gpio_set_function(CS0_PIN, GPIO_FUNC_NULL);
-    gpio_set_function(SCK1_PIN, GPIO_FUNC_NULL);
-    gpio_set_function(CS1_PIN, GPIO_FUNC_NULL);
-    gpio_set_input_enabled(RX0_PIN, true);
-    gpio_set_input_enabled(RX1_PIN, true);
-    gpio_set_input_enabled(TX_PIN, true);
-    gpio_set_input_enabled(SCK0_PIN, true);
-    gpio_set_input_enabled(CS0_PIN, true);
-    gpio_set_input_enabled(SCK1_PIN, true);
-    gpio_set_input_enabled(CS1_PIN, true);
+    pins_reset();
 }
 
 void spi_slave_init(bool sniff)

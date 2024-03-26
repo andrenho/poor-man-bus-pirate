@@ -4,6 +4,7 @@
 #include <hardware/gpio.h>
 
 #include "output.h"
+#include "pins.h"
 
 #define RX_PIN   0
 #define CS_PIN   1
@@ -28,14 +29,7 @@ static void spi_master_connect()
 static void spi_master_disconnect()
 {
     spi_deinit(spi0);
-    gpio_set_function(RX_PIN, GPIO_FUNC_NULL);
-    gpio_set_function(TX_PIN, GPIO_FUNC_NULL);
-    gpio_set_function(SCK_PIN, GPIO_FUNC_NULL);
-    gpio_set_function(CS_PIN, GPIO_FUNC_NULL);
-    gpio_set_input_enabled(RX_PIN, true);
-    gpio_set_input_enabled(TX_PIN, true);
-    gpio_set_input_enabled(SCK_PIN, true);
-    gpio_set_input_enabled(CS_PIN, true);
+    pins_reset();
 }
 
 void spi_master_init()
