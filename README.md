@@ -15,17 +15,6 @@ This circuit can be used to either sniff communication between components (such 
   - **PWM** output
 - Supported I/O voltages: 3.3V and 5V
 
-## Pinout
-
-| BP pin     | UART | SPI master | SPI slave | SPI sniff | I2C function | PWM function | RPi Pico pin       |
-|------------|------|------------|-----------|-----------|--------------|--------------|--------------------|
-| **COMM0**  | TX   | MISO       | MOSI      | RX0       | SDA          | PWM0         | GP0 (1)            |
-| **COMM1**  | RX0  | CS         | SS        | SS        | SCL          |              | GP1 (2)            |
-| **COMM2**  | CTS  | SCK        | SCK       | SCK       |              |              | GP2 (4), GP10 (14) |
-| **COMM3**  | RTS  | MOSI       | MISO      |           |              |              | GP3 (5)            |
-| **COMM4**  | RX1  |            |           | RX1       |              |              | GP5 (7), GP8 (11)  |
-| **GND**    |      |            |           |           |              |              | GND                |
-
 ## Commands
 
 Connect the Pico USB to the computer, and then open a serial terminal to the USB port at 115200 baud.
@@ -59,6 +48,17 @@ Settings are saved on flash, and persist after a reboot.
 Communication example:
 
 ![image](https://github.com/andrenho/poor-man-bus-pirate/assets/84652/18411b9d-3f05-4c4b-a21a-cb78f8430f43)
+
+## Pinout
+
+| BP pin     | UART | SPI master | SPI slave | SPI sniff | I2C function | PWM function | RPi Pico pin       |
+|------------|------|------------|-----------|-----------|--------------|--------------|--------------------|
+| **COMM0**  | TX   | MISO       | MOSI      | RX0       | SDA          | PWM0         | GP0 (1)            |
+| **COMM1**  | RX0  | CS         | SS        | SS        | SCL          |              | GP1 (2)            |
+| **COMM2**  | CTS  | SCK        | SCK       | SCK       |              |              | GP2 (4), GP10 (14) |
+| **COMM3**  | RTS  | MOSI       | MISO      |           |              |              | GP3 (5)            |
+| **COMM4**  | RX1  |            |           | RX1       |              |              | GP5 (7), GP8 (11)  |
+| **GND**    |      |            |           |           |              |              | GND                |
 
 # Circuit
 
