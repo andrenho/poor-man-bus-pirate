@@ -43,6 +43,8 @@ Connect the Pico USB to the computer, and then open a serial terminal to the USB
   - `set pwm.freq [NNNN]` (frequency in Hz, default: 100000)
   - `set pwm.duty [NN]` (% duty cycle, default: 50)
 
+Press `CTRL+C` to end communication with a protocol at any time.
+
 Settings are saved on flash, and persist after a reboot.
 
 Communication example:
@@ -74,6 +76,14 @@ This section is optional, and adds blinking lights to communication channels to 
 
 ![image](https://github.com/andrenho/poor-man-bus-pirate/assets/84652/0d1dda8b-4ede-4791-a77b-8b5e4be25a43)
 
+# Firmware update
+
+To update the firmware:
+
+1. Download the file `poor-man-bus-pirate.zip` and uncompress it.
+2. Connect the Raspberry Pi Pico via USB to the computer while pressing the `BOOTSEL` button.
+3. This will create a USB mount. Copy the file `poor-man-bus-pirate.uf2` into that directory.
+4. Restart the Pico.
 
 # Implementation
 

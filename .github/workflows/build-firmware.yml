@@ -1,0 +1,56 @@
+name: Build firmware
+
+on:
+  push:
+    # Pattern matched against refs/tags
+    tags:        
+      - '*'           # Push events to every tag not containing /
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    permissions: write-all
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install cmake gcc-arm-none-eabi libnewlib-arm-none-eabi build-essential 
+
+    - name: Install Pico SDK
+      run: |
+        git clone -b master https://github.com/raspberrypi/pico-sdk.git
+        cd pico-sdk
+        git submodule update --init
+        cd ..
+
+    - name: Configure CMake
+      run: |
+        mkdir -p firmware/build
+        cd firmware/build
+        export PICO_SDK_PATH=/home/runner/work/poor-man-bus-pirate/poor-man-bus-pirate/pico-sdk
+        cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} ..
+
+    - name: Build
+      run: |
+        cd firmware/build
+        export PICO_SDK_PATH=/home/runner/work/poor-man-bus-pirate/poor-man-bus-pirate/pico-sdk
+        make
+
+    - name: Prepare package
+      run:
+        zip -j poor-man-bus-pirate-${{ github.ref_name }}.zip firmware/build/poor-man-bus-pirate.elf firmware/build/poor-man-bus-pirate.uf2 firmware/build/poor-man-bus-pirate.bin
+
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: poor-man-bus-pirate-${{ github.ref_name }}.zip
+        asset_name: poor-man-bus-pirate-${{ github.ref_name }}.zip
+        tag: ${{ github.ref }}
+        overwrite: true
