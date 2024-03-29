@@ -68,6 +68,7 @@ void execute(uint8_t n_tokens, char tokens[MAX_TOKENS][MAX_TOKEN_SZ])
                     syntax_error();
                 }
             } else if (strcmp(tokens[1], "i2c_slave") == 0) {
+                printf("I2C slave is not implemented yet, sorry!\n");
             } else if (strcmp(tokens[1], "pwm") == 0) {
                 if (n_tokens == 2)
                     printf("Options: on, off\n");
