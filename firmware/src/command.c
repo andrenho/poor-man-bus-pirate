@@ -41,7 +41,10 @@ void execute(uint8_t n_tokens, char tokens[MAX_TOKENS][MAX_TOKEN_SZ])
             printf("Options: uart, spi_master, spi_slave, spi_sniff, i2c_master, i2c_slave, pmw\n");
         } else if (n_tokens >= 2) {
             if (strcmp(tokens[1], "uart") == 0) {
-                uart_init_();
+                if (n_tokens == 3 && strcmp(tokens[2], "guess") == 0)
+                    uart_guess_speed();
+                else
+                    uart_init_();
             } else if (strcmp(tokens[1], "spi_master") == 0) {
                 spi_master_init();
             } else if (strcmp(tokens[1], "spi_slave") == 0) {
@@ -87,13 +90,6 @@ void execute(uint8_t n_tokens, char tokens[MAX_TOKENS][MAX_TOKEN_SZ])
             variables_print();
         else if (n_tokens == 3)
             variable_set(tokens[1], tokens[2]);
-        else
-            syntax_error();
-    } else if (strcmp(tokens[0], "guess") == 0) {
-        if (n_tokens == 1)
-            printf("Options: uart\n");
-        else if (n_tokens == 2 && strcmp(tokens[0], "uart") == 0)
-            uart_guess_speed();
         else
             syntax_error();
     } else {

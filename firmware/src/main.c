@@ -19,10 +19,12 @@ int main()
     gpio_set_dir(LED_PIN, GPIO_OUT);
     gpio_put(LED_PIN, 1);
 
+    printf("Press any key to start...");
     getchar();
+    printf("\n");
 
     printf("Welcome to Poor Man Bus Pirate!\n");
-    printf("Available commands: set, reset, use, guess\n");
+    printf("Available commands: set, reset, use\n");
 
     output_init();
     variables_load();

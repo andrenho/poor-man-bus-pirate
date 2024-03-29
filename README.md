@@ -28,7 +28,7 @@ Connect the Pico USB to the computer, and then open a serial terminal to the USB
   - `set uart.mode [MMM]` (default: 8N1)
   - `set uart.hflow [on | off]` (default: off)
   - `set uart.output [ascii | dec | bin | hex]` (default: ascii)
-  - `guess uart`: tries to autodetect baudrate
+  - `use uart guess`: tries to autodetect baudrate
 - SPI
   - `set spi.cpol [0 | 1]` (default: 0)
   - `set spi.cpha [0 | 1]` (default: 0)
@@ -39,6 +39,7 @@ Connect the Pico USB to the computer, and then open a serial terminal to the USB
 - I2C
   - `set i2c.baud [NNNN]` (baud rate in Hz, master only, default: 100000)
   - `set i2c.output [ascii | dec | bin | hex]` (default: hex)
+  - `use i2c scan`: scan for connected slave addresses
 - PWM
   - `set pwm.freq [NNNN]` (frequency in Hz, default: 100000)
   - `set pwm.duty [NN]` (% duty cycle, default: 50)
