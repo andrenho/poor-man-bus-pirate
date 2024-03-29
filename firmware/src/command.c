@@ -2,12 +2,15 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <limits.h>
 
 #include "uart.h"
 #include "variables.h"
 #include "spi_slave.h"
 #include "spi_master.h"
 #include "pwm.h"
+#include "i2c_master.h"
 
 #define MAX_TOKENS 6
 #define MAX_TOKEN_SZ 20
@@ -35,7 +38,7 @@ void execute(uint8_t n_tokens, char tokens[MAX_TOKENS][MAX_TOKEN_SZ])
 
     if (strcmp(tokens[0], "use") == 0) {
         if (n_tokens == 1) {
-            printf("Options: uart, spi_master, spi_slave, spi_sniff, i2c_master, i2c_salve, pmw\n");
+            printf("Options: uart, spi_master, spi_slave, spi_sniff, i2c_master, i2c_slave, pmw\n");
         } else if (n_tokens >= 2) {
             if (strcmp(tokens[1], "uart") == 0) {
                 uart_init_();
@@ -46,6 +49,21 @@ void execute(uint8_t n_tokens, char tokens[MAX_TOKENS][MAX_TOKEN_SZ])
             } else if (strcmp(tokens[1], "spi_sniff") == 0) {
                 spi_slave_init(true);
             } else if (strcmp(tokens[1], "i2c_master") == 0) {
+                if (n_tokens == 2) {
+                    printf("Options: scan, [slave_address]\n");
+                } else if (n_tokens == 3) {
+                    if (strcmp(tokens[2], "scan") == 0) {
+                        i2c_master_scan();
+                    } else {
+                        unsigned long addr = strtoul(tokens[2], NULL, 16);
+                        if (addr != ULONG_MAX)
+                            i2c_master_init(addr);
+                        else
+                            syntax_error();
+                    }
+                } else {
+                    syntax_error();
+                }
             } else if (strcmp(tokens[1], "i2c_slave") == 0) {
             } else if (strcmp(tokens[1], "pwm") == 0) {
                 if (n_tokens == 2)

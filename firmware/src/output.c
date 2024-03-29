@@ -111,10 +111,25 @@ void output_print_queues()
 int output_get_char()
 {
     int c = getchar_timeout_us(0);
+
     if (c == 0x3)
         return CTRL_C;
+    else if (c == 0x5)
+        return CTRL_E;
+    else if (c == 0x6)
+        return CTRL_F;
+    else if (c == 0x7)
+        return CTRL_G;
+    else if (c == 0x8)
+        return CTRL_H;
+    else if (c == 0x9)
+        return CTRL_I;
+    else if (c == 0xb)
+        return CTRL_K;
     else if (c == PICO_ERROR_TIMEOUT)
         return NO_CHAR;
+
+    // printf("{%02X}", c);
 
     if (output_mode == ASCII) {
         return c;
